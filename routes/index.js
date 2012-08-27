@@ -1,8 +1,8 @@
+var fs = require('fs');
 
-/*
- * GET home page.
- */
-
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
-};
+module.exports = function (app, models){
+    fs.readdirSync(__dirname).forEach(function(file) {
+        if (file == "index.js") return;
+        require ('./' + file)(app, models);
+    });
+}

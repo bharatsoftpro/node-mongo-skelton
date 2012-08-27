@@ -8,6 +8,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
+var models = require ('./models');
 var app = express();
 
 app.configure(function(){
@@ -28,7 +29,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+require('./routes') (app, models);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
